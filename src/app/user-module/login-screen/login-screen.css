@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+.titulo {
+
+    font-size: 76px;
+    margin-bottom: 16px;
+    font-weight: 400;
+
+}
+
+.robo-image {
+
+background-image: url("/imgs/Rectangle\ 1.png");
+background-size: cover;
+background-position: 0px -100px;
+
+
+width: 50vw; /*50% do tamanho horizontal do monitor */
+height: 100vh; /* 50% da altura da tela */
+
+}
+
+.page-container {
+
+    display: flex; /* um ao lado do outro */
+
+}
+
+.login-container {
+
+width: 50vw; /*50% do tamanho horizontal do monitor */
+height: 100vh; /* 50% da altura da tela */
+
+/* Kit Sobrevivência da centralização */
+
+display: flex; /*Ativar o flex */
+flex-direction: column; /*Muda o flex para colunas */
+align-items: center; /* Centralizar horizontalmente */
+justify-content: center; /* Centralizar verticalmente */
+
+}
+
+.classe { /* Com ponto antes*/
+
+}
+
+#id { /* Com hashtag antes */
+
+}
+
+img { /* Sem nenhum prefixo*/
+
+}
+
+.login-container img {
+
+    height: 60px;
+
+}
+
+.inpt {
+
+    padding: 18px;
+    background-color: #F7F9FB;
+    width: 377px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 16px;
+
+}
+
+.button {
+
+    padding: 18px;
+    font-size: 18px;
+    background-color:#1C1C1C;
+    color: #FFFFFF;
+    width: 377px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    
+}
