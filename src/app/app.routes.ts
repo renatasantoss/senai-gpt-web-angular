@@ -8,6 +8,12 @@ export const routes: Routes = [
         path: "login",
         loadComponent: () => LoginScreen
 
-    }
+    },
 
+    {
+
+        path: "",
+        loadComponent: () => LoginScreen
+
+    }
 ];
