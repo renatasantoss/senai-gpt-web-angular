@@ -24,12 +24,43 @@ export class LoginScreen {
 
   }
 
-  onLoginClick() {
-
-    alert("Botão de Login clicado.");
+  async onLoginClick() {
 
     console.log("Email", this.loginForm.value.email);
     console.log("Password", this.loginForm.value.password);
+
+    if (this.loginForm.value.email == ""){
+
+      alert("Preencha o e-mail.")
+      return;
+
+    }
+
+    if (this.loginForm.value.password == ""){
+
+      alert("Preencha a senha.")
+      return;
+
+    }
+
+    let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
+      method: "POST", // Enviar,
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      })
+    });
+
+    console.log("STATUS CODE", response.status);
+   
+    if (response.status >= 200 && response.status <=299) {
+      alert("Requisição bem-sucedida");
+    } else {
+      alert("Credencial incorreta");
+    } 
 
   }
 
