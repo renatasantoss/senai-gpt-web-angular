@@ -81,3 +81,29 @@ img { /* Sem nenhum prefixo*/
     cursor: pointer;
     
 }
+
+.error-message {
+
+    color: red;
+    font-size: 13px;
+    transform: translateY(-12px) translateX(-90px);
+    
+}
+
+.error-messagepassword {
+
+    color: red;
+    font-size: 13px;
+    transform: translateY(-12px) translateX(-90px);
+
+}
+
+.approvedMessage {
+
+    color: black;
+    font-size: 13px;
+    transform: translateY(-12px) translateX(94px);
+
+
+
+}

@@ -11,6 +11,10 @@ export class LoginScreen {
 
   loginForm: FormGroup;
 
+  emailErrorMessage: string; 
+  passwordErrorMessage: string;
+  approvedMessage: string;
+
   constructor(private fb: FormBuilder) {
     // Quando a tela iniciar.
 
@@ -22,6 +26,11 @@ export class LoginScreen {
       password: ["", [Validators.required]]
     });
 
+    // Inicia com uma string vazia
+    this.emailErrorMessage = "";
+    this.passwordErrorMessage = "";
+    this.approvedMessage = "";
+
   }
 
   async onLoginClick() {
@@ -31,14 +40,14 @@ export class LoginScreen {
 
     if (this.loginForm.value.email == ""){
 
-      alert("Preencha o e-mail.")
-      return;
-
+      // alert("Preencha o e-mail.")
+      this.emailErrorMessage = "O campo e-mail é obrigatório.";
     }
 
     if (this.loginForm.value.password == ""){
 
-      alert("Preencha a senha.")
+      // alert("Preencha a senha.")
+      this.passwordErrorMessage = "O campo senha é obrigatório.";
       return;
 
     }
@@ -57,9 +66,10 @@ export class LoginScreen {
     console.log("STATUS CODE", response.status);
    
     if (response.status >= 200 && response.status <=299) {
-      alert("Requisição bem-sucedida");
+      //alert("Requisição bem-sucedida");
+      this.approvedMessage = "Login concluido com sucesso!"
     } else {
-      alert("Credencial incorreta");
+      //alert("Credencial incorreta");
     } 
 
   }
