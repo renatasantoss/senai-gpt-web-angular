@@ -1,13 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
-*{
-
-margin: 0px;
-padding: 0px;
-box-sizing: border-box;
-font-family: Inter;
-
-}
 
 .container {
 
@@ -43,7 +34,7 @@ font-family: Inter;
 
 .logo {
 
-    background-image: url(../assets/imgs/Chat.png);
+    background-image: url(/imgs/Chat.png);
     background-size: cover;
     background-position: 0px - 100px;
     width: 446px;
@@ -151,7 +142,7 @@ font-family: Inter;
     align-items: center;
     width: 280px;
     text-align: center;
-    margin-right: 40px;
+
     
 }
 
@@ -162,17 +153,18 @@ font-family: Inter;
     align-items: center;
     width: 280px;
     text-align: center;
-    margin-right: 40px;
+
 
 }
 
-.Limitations{
+.limitations{
 
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 280px;
     text-align: center;
+
 
 }
 
@@ -248,14 +240,14 @@ p{
 
 }
 
-.Capabilities i{
+.capabilities i{
 
     font-size: 25px;
     margin-bottom: 16px;
 
 }
 
-.Limitations i{
+.limitations i{
 
     font-size: 25px;
     margin-bottom: 16px;

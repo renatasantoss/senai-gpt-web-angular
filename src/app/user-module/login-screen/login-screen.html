@@ -1,10 +1,6 @@
-<header></header>
-
-    <main CLASS="page-container"> <!--Caixa maior-->
+    <main class="page-container"> <!--Caixa maior-->
       
-        <div class= "robo-image">
-    
-        </div>
+        <div class= "robo-image"></div>
         
         <div class="login-container" [formGroup]="loginForm">
 
@@ -17,7 +13,7 @@
 
             <input class="inpt" type="password" placeholder="Insira a senha" formControlName="password">
             <span class="error-messagepassword">{{ passwordErrorMessage }}</span>
-            <span *ngIF= "approvedMessage != ''" class="approvedMessage">{{ approvedMessage }}</span>
+            <span class="approvedMessage">{{ approvedMessage }}</span>
 
             <button class="button" (click)="onLoginClick()">Entrar</button>
             

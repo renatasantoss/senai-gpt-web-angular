@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginScreen {
   passwordErrorMessage: string;
   approvedMessage: string;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     // Quando a tela iniciar.
 
     //Inicia o formulário;
@@ -68,9 +68,25 @@ export class LoginScreen {
     if (response.status >= 200 && response.status <=299) {
       //alert("Requisição bem-sucedida");
       this.approvedMessage = "Login concluido com sucesso!"
+
+      let json = await response.json();
+
+      console.log("JSON", json)
+
+      let meuToken = json.accessToken;
+      let userId = json.user.id;
+
+      localStorage.setItem("meuToken", meuToken);
+      localStorage.setItem("meuId", userId);
+
+      window.location.href = "chat";
+
+
     } else {
       //alert("Credencial incorreta");
     } 
+
+    this.cd.detectChanges(); // Força uma atualização da tela.
 
   }
 

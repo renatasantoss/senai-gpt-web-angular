@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { LoginScreen } from './user-module/login-screen/login-screen';
 import { TelaChat } from './tela-chat/tela-chat';
 
+
 export const routes: Routes = [
 
     {
@@ -16,23 +17,14 @@ export const routes: Routes = [
         path: "",
         loadComponent: () => LoginScreen
 
-    }
-];
-
-export const routes: [
-
-    {
-
-        path: "Chat",
-        loadComponent: () => TelaChat
-
     },
 
     {
 
-        path: "",
+        path: "chat",
         loadComponent: () => TelaChat
 
-    }
+    },
 
-]
+];
+
