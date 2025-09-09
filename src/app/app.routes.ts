@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { LoginScreen } from './user-module/login-screen/login-screen';
 import { TelaChat } from './tela-chat/tela-chat';
+import { authGuard } from './auth.guard';
 
 
 export const routes: Routes = [
@@ -22,7 +23,8 @@ export const routes: Routes = [
     {
 
         path: "chat",
-        loadComponent: () => TelaChat
+        loadComponent: () => TelaChat,
+        canActivate: [authGuard]
 
     },
 
