@@ -1,0 +1,34 @@
+    <main class="page-container"> <!--Caixa maior-->
+      
+        <div class= "robo-image"></div>
+        
+        <div class="login-container" [formGroup]="loginForm">
+
+            <img class="logo" src="imgs/Chat.png" alt="Logo do SenaiGPT">
+
+            <h1 class="titulo">Novo Usuário</h1>
+
+            <input class="inpt" type="text" placeholder="Insira o nome do Usuário" formControlName="username"> 
+
+            <input class="inpt" type="email" placeholder="Insira o e-mail" formControlName="email">
+            <span class="error-message">{{ emailErrorMessage }}</span>
+
+            <input class="inpt" type="password" placeholder="Insira a senha" formControlName="password">
+            <span class="error-messagepassword">{{ passwordErrorMessage }}</span>
+            <span class="approvedMessage">{{ approvedMessage }}</span>
+
+            <input class="input" type="password" placeholder="Confirme a senha" formControlName="confirmPassword">
+            <span class="error-message">{{ confirmPasswordErrorMessage }}</span>
+
+            <button class="button" (click)="onLoginClick()">Entrar</button>
+
+            <button class="button" (click)="onCreateAccountClick()">Novo Usuário</button>
+            <button class="button" (click)="onForgotPasswordClick()">Esqueci a Senha</button>
+
+            <p>Clique aqui para fazer o login</p>
+            
+        </div>
+
+    </main>
+
+<footer></footer>
