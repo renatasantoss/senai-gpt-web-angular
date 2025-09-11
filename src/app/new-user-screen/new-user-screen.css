@@ -10,9 +10,10 @@
 
 .robo-image {
 
-background-image: url("/imgs/Rectangle\ 1.png");
+background-image: url("/imgs/up.jpg");
 background-size: cover;
-background-position: 0px -100px;
+background-position: 0px -1000px;
+background-size: 150%;
 
 
 width: 50vw; /*50% do tamanho horizontal do monitor */
@@ -38,19 +39,7 @@ flex-direction: column; /*Muda o flex para colunas */
 align-items: center; /* Centralizar horizontalmente */
 justify-content: center; /* Centralizar verticalmente */
 
-/* }
-
-.classe { /* Com ponto antes*/
-
-/* }
-
-#id { /* Com hashtag antes */
-
-/* } */
-
-/* img { /* Sem nenhum prefixo*/
-/* 
-} */ */ */ */
+}
 
 .login-container img {
 
@@ -104,4 +93,12 @@ justify-content: center; /* Centralizar verticalmente */
     font-size: 13px;
     transform: translateY(-12px) translateX(94px);
 
+}
+
+.link-login {
+
+    cursor: pointer;
+    text-decoration: underline;
+    color: black;
+    padding: 16px;
 }

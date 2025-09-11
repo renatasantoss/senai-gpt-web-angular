@@ -5,6 +5,7 @@ import { authGuard } from './auth.guard';
 import { NewUserScreen } from './new-user-screen/new-user-screen';
 
 
+
 export const routes: Routes = [
 
     {
@@ -31,7 +32,7 @@ export const routes: Routes = [
 
     {
 
-        path: "new user screen",
+        path: "new-user-screen",
         loadComponent: () => NewUserScreen
 
     }

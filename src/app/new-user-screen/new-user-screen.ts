@@ -10,11 +10,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class NewUserScreen {
 
-  loginForm: FormGroup;
+  registerForm: FormGroup;
 
   emailErrorMessage: string; 
   passwordErrorMessage: string;
+  confirmPasswordErrorMessage: string;
   approvedMessage: string;
+  usernameErrorMessage: string;
 
   constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     // Quando a tela iniciar.
@@ -22,43 +24,43 @@ export class NewUserScreen {
     //Inicia o formulário;
     //Cria campo obrigatório de e-mail;
     //Cria campo obrigatório de senha.
-    this.loginForm = this.fb.group({
-      username: ['', [Validators.required]],
+    this.registerForm = this.fb.group({
+      username: ["", [Validators.required]],
       email: ["", [Validators.required]],
       password: ["", [Validators.required]],
-      confirmPassword: ['', [Validators.required]]
+      confirmPassword: ["", [Validators.required]]
     });
 
     // Inicia com uma string vazia
     this.emailErrorMessage = "";
     this.passwordErrorMessage = "";
-    this.confirmPasswordErrorMessage = '';
+    this.confirmPasswordErrorMessage = "";
     this.approvedMessage = "";
+    this.usernameErrorMessage = "";
 
   }
 
-  async onLoginClick() {
+  async enterLoginClick() {
 
-    console.log("Email", this.loginForm.value.email);
-    console.log("Password", this.loginForm.value.password);
-    }
+    console.log("Email", this.registerForm.value.email);
+    console.log("Password", this.registerForm.value.password);
+    console.log("Criar nova conta de usuário", this.registerForm.value.username);
+    console.log("Confirmar a senha", this.registerForm.value.confirmPassword);
+    
+      
+    if (this.registerForm.value.username === ""){
 
-    onCreateAccountClick() {
-    console.log("Criar nova conta de usuário");
-    }
+      this.usernameErrorMessage = "O campo usuário é obrigatório.";
 
-  onForgotPasswordClick() {
-    console.log("Recuperar senha");
-    }
+    } 
+    
+    if (this.registerForm.value.email === ""){
 
-
-    if (this.loginForm.value.email == ""){
-
-      // alert("Preencha o e-mail.")
       this.emailErrorMessage = "O campo e-mail é obrigatório.";
+
     }
 
-    if (this.loginForm.value.password == ""){
+    if (this.registerForm.value.password === ""){
 
       // alert("Preencha a senha.")
       this.passwordErrorMessage = "O campo senha é obrigatório.";
@@ -66,14 +68,23 @@ export class NewUserScreen {
 
     }
 
-    let response = await fetch("https://senai-gpt-api.azurewebsites.net/login", {
+    if (this.registerForm.value.confirmPassword === ""){
+
+      // alert("Preencha a senha.")
+      this.confirmPasswordErrorMessage = "O campo senha é obrigatório.";
+      return;
+
+    }
+
+
+    let response = await fetch("https://senai-gpt-api.azurewebsites.net/users", {
       method: "POST", // Enviar,
       headers: {
         "Content-Type" : "application/json"
       },
       body: JSON.stringify({
-        email: this.loginForm.value.email,
-        password: this.loginForm.value.password
+        email: this.registerForm.value.email,
+        password: this.registerForm.value.password
       })
     });
 
@@ -95,11 +106,10 @@ export class NewUserScreen {
 
       window.location.href = "chat";
 
-
     } else {
-      //alert("Credencial incorreta");
+      alert("Credenciais incorretas.");
     } 
 
     this.cd.detectChanges(); // Força uma atualização da tela.
 
-  }
+  }}
