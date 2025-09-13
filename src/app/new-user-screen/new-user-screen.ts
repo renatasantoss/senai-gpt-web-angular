@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-new-user-screen',
   imports: [ReactiveFormsModule],
@@ -26,8 +27,8 @@ export class NewUserScreen {
     //Cria campo obrigatório de senha.
     this.registerForm = this.fb.group({
       username: ["", [Validators.required]],
-      email: ["", [Validators.required]],
-      password: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email]],
+      password: ["", [Validators.required, Validators.minLength(6)]],
       confirmPassword: ["", [Validators.required]]
     });
 
@@ -47,7 +48,7 @@ export class NewUserScreen {
     console.log("Criar nova conta de usuário", this.registerForm.value.username);
     console.log("Confirmar a senha", this.registerForm.value.confirmPassword);
     
-      
+          
     if (this.registerForm.value.username === ""){
 
       this.usernameErrorMessage = "O campo usuário é obrigatório.";
@@ -57,6 +58,8 @@ export class NewUserScreen {
     if (this.registerForm.value.email === ""){
 
       this.emailErrorMessage = "O campo e-mail é obrigatório.";
+
+      this.emailErrorMessage = "Digite um e-mail válido.";
 
     }
 
@@ -76,16 +79,36 @@ export class NewUserScreen {
 
     }
 
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) { 
+      this.confirmPasswordErrorMessage = "As senhas não coincidem.";
+      return;
+    } 
 
+      const userData = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      username: this.registerForm.value.username
+    };
+
+    //   this.http.post("https://senai-gpt-api.azurewebsites.net/users", userData).subscribe(
+    //   (response: any) => {
+    //     this.approvedMessage = "Cadastro realizado com sucesso!";
+    //     console.log("Resposta do backend:", response);
+
+    //   },
+    //   (error: HttpErrorResponse) => {
+    //     console.error("Erro ao cadastrar usuário:", error);
+    //     alert("Erro ao realizar cadastro. Tente novamente.");
+    //   }
+
+    // );
+    
     let response = await fetch("https://senai-gpt-api.azurewebsites.net/users", {
       method: "POST", // Enviar,
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify({
-        email: this.registerForm.value.email,
-        password: this.registerForm.value.password
-      })
+      body: JSON.stringify(userData)
     });
 
     console.log("STATUS CODE", response.status);
@@ -98,13 +121,7 @@ export class NewUserScreen {
 
       console.log("JSON", json)
 
-      let meuToken = json.accessToken;
-      let userId = json.user.id;
-
-      localStorage.setItem("meuToken", meuToken);
-      localStorage.setItem("meuId", userId);
-
-      window.location.href = "chat";
+      window.location.href = "login";
 
     } else {
       alert("Credenciais incorretas.");
