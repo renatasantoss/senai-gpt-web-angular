@@ -41,7 +41,7 @@ export class NewUserScreen {
 
   }
 
-  async enterLoginClick() {
+  async onCadastroClick() {
 
     console.log("Email", this.registerForm.value.email);
     console.log("Password", this.registerForm.value.password);
@@ -108,7 +108,11 @@ export class NewUserScreen {
       headers: {
         "Content-Type" : "application/json"
       },
-      body: JSON.stringify(userData)
+      body: JSON.stringify({
+      username: this.registerForm.value.username,
+      Email: this.registerForm.value.email,
+      Password: this.registerForm.value.password,
+        })
     });
 
     console.log("STATUS CODE", response.status);
