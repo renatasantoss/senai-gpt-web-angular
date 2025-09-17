@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common';
+import { first, firstValueFrom } from 'rxjs';
 
 interface Ichat {
 
@@ -10,20 +11,32 @@ interface Ichat {
 
 }
 
+interface IMessage {
+
+  chatId: number;
+  id: number;
+  text: string;
+  userId: string;
+
+}
+
 @Component({
   selector: 'app-tela-chat',
-  imports: [HttpClientModule, NgForOf, CommonModule],
+  imports: [NgForOf, CommonModule],
   templateUrl: './tela-chat.html',
   styleUrl: './tela-chat.css'
 })
 export class TelaChat {
 
   chats: Ichat[];
+  chatSelecionado: Ichat;
+  mensagens: IMessage[];
 
-  constructor (private http: HttpClient) {
+  constructor (private http: HttpClient, private cd: ChangeDetectorRef) {
 
     this.chats = [];
-    
+    this.chatSelecionado = null!;
+    this.mensagens = [];
 
   } 
 
@@ -35,11 +48,11 @@ export class TelaChat {
 
   async getChats () {
 
-    let response = await this.http.get("https://senai-gpt-api.azurewebsites.net/chats", {
+    let response = await firstValueFrom(this.http.get("https://senai-gpt-api.azurewebsites.net/chats", {
       headers: {
         "Authorization" : "Bearer " + localStorage.getItem("meuToken")
       } 
-    }).toPromise();
+    }));
 
     console.log("Chats", response);
 
@@ -52,5 +65,28 @@ export class TelaChat {
       console.log("Erro ao buscar os chats.")
 
     }
+
+    this.cd.detectChanges();
+
+  }
+
+  async onChatClick (chatClicado: Ichat) {
+
+    console.log("Chat Clicado", chatClicado);
+
+    this.chatSelecionado = chatClicado;
+
+    //Lógica para buscar as mensagens.
+
+      let response = await firstValueFrom(this.http.get("https://senai-gpt-api.azurewebsites.net/messages?chatId=" + chatClicado.id, {
+        headers: {
+          "Authorization" : "Bearer " + localStorage.getItem("meuToken")
+        } 
+    }));
+
+    console.log("MENSAGENS", response);
+
+    this.mensagens = response as IMessage[];
+
   }
 }
