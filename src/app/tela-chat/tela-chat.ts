@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common';
 import { first, firstValueFrom } from 'rxjs';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 interface Ichat {
 
@@ -22,7 +23,7 @@ interface IMessage {
 
 @Component({
   selector: 'app-tela-chat',
-  imports: [NgForOf, CommonModule],
+  imports: [NgForOf, CommonModule, ReactiveFormsModule],
   templateUrl: './tela-chat.html',
   styleUrl: './tela-chat.css'
 })
@@ -31,6 +32,7 @@ export class TelaChat {
   chats: Ichat[];
   chatSelecionado: Ichat;
   mensagens: IMessage[];
+  mensagemUsuario = new FormControl("");
 
   constructor (private http: HttpClient, private cd: ChangeDetectorRef) {
 
@@ -88,5 +90,20 @@ export class TelaChat {
 
     this.mensagens = response as IMessage[];
 
+    this.cd.detectChanges();
+
   }
+
+  async enviarMensagem () {
+
+    let novaMensagemUsuario = {
+
+      chatId: this.chatSelecionado.id,
+      UserId: localStorage.getItem("meuId"),
+      text: this.mensagemUsuario.value
+
+    };
+
+  }
+
 }
