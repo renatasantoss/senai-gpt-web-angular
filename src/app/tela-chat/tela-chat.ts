@@ -104,6 +104,51 @@ export class TelaChat {
 
     };
 
-  }
+      let novaMensagemUsuarioResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/messages", novaMensagemUsuario, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer " + localStorage.getItem("meuToken")
+      } 
+    }));
 
+    await this.onChatClick(this.chatSelecionado);
+
+    // 2 - Enviar a mensagem do usuário para a IA responder
+
+    let respostaIAResponse =  await firstValueFrom(this.http.post("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent", {
+      "contents": [
+        {
+          "parts": [
+            {
+              "text": this.mensagemUsuario.value + ". Me dê uma resposta objetiva."
+            }
+          ]
+        }
+      ]
+    }, {
+
+      headers: {
+        "Content-Type": "application/json",
+        "X-goog-api-key": "AIzaSyDV2HECQZLpWJrqCKEbuq7TT5QPKKdLOdo"
+      }
+    })) as any;
+
+    let novaRespostaIA = {
+
+      chatId: this.chatSelecionado.id,
+      userId: "chatbot",
+      text: respostaIAResponse.candidates[0].content.parts[0].text
+
+    }
+
+      let novaRespostaIAResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/messages", novaMensagemUsuario, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer " + localStorage.getItem("meuToken")
+      } 
+    }));
+
+    await this.onChatClick(this.chatSelecionado);
+
+  }
 }
