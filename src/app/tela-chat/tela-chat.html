@@ -5,7 +5,7 @@
         <aside class="left-panel">
          
             <div class="top">
-                <button class="button">
+                <button class="button" (click)="novoChat()">
                     <i class="fa-solid fa-plus"></i>
                     New Chat
                 </button>
@@ -25,7 +25,7 @@
             </div>
 
             <div class="bottom">
-                <button class="item-chat">
+             <!--    <button class="item-chat">
                     <i class="fa-regular fa-trash-can"></i>
                     Clear conversations
                 </button>
@@ -43,9 +43,9 @@
                 <button class="item-chat">
                     <i class="fa-regular fa-file"></i>
                     Updates & FAQ
-                </button>
+                </button> -->
 
-                <button class="item-chat">
+                <button class="item-chat" (click)="deslogar()">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     Log out
                 </button>
@@ -102,7 +102,8 @@
 
             }
 
-            @if (chatSelecionado != null) {
+            @if (chatSelecionado != null) { 
+                <!-- Só vai ser executado quando o usuário tiver clicado em um chat -->
 
                 <div class="chat-container"> 
 
@@ -124,8 +125,6 @@
 
                 </div>
 
-            }
-
                 <div class="input-container">
 
                     <i class="fa-solid fa-microphone"></i>
@@ -136,6 +135,8 @@
                     <i class="send-button fa-solid fa-paper-plane" (click)="enviarMensagem()"></i>
 
                 </div>
+
+            }
 
         </main>
         

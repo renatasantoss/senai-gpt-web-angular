@@ -48,17 +48,23 @@ export class TelaChat {
 
   }
 
+  // Vai na API e busca os chats.
   async getChats () {
 
     let response = await firstValueFrom(this.http.get("https://senai-gpt-api.azurewebsites.net/chats", {
       headers: {
         "Authorization" : "Bearer " + localStorage.getItem("meuToken")
       } 
-    }));
+    })) as Ichat[];
 
     console.log("Chats", response);
 
     if (response) {
+
+      let userId = localStorage.getItem("meuId");
+
+      response = response.filter(chat => chat.userId == userId);
+
 
      this.chats = response as [];
 
@@ -99,7 +105,7 @@ export class TelaChat {
     let novaMensagemUsuario = {
 
       chatId: this.chatSelecionado.id,
-      UserId: localStorage.getItem("meuId"),
+      userId: localStorage.getItem("meuId"),
       text: this.mensagemUsuario.value
 
     };
@@ -141,7 +147,7 @@ export class TelaChat {
 
     }
 
-      let novaRespostaIAResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/messages", novaMensagemUsuario, {
+      let novaRespostaIAResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/messages", novaRespostaIA, {
         headers: {
           "Content-Type": "application/json",
           "Authorization" : "Bearer " + localStorage.getItem("meuToken")
@@ -151,4 +157,55 @@ export class TelaChat {
     await this.onChatClick(this.chatSelecionado);
 
   }
+
+  async novoChat() {
+
+    const nomeChat = prompt("Digite o nome do novo chat:");
+
+    if (!nomeChat) {
+      // Caso o usuário deixe o campo vazio.
+
+      alert("Nome inválido.");
+      return;
+
+    }
+
+    const novoChatObj = {
+
+      chatTitle: nomeChat,
+      userId: localStorage.getItem("meuId")
+      // id - O Backend irá gerar.
+
+    }
+
+    let novoChatResponse = await firstValueFrom(this.http.post("https://senai-gpt-api.azurewebsites.net/chats", novoChatObj, {
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization" : "Bearer " + localStorage.getItem("meuToken")
+      } 
+
+  })) as Ichat;
+
+  // Atualiza os chats da tela
+  await this.getChats();
+
+  await this.onChatClick(novoChatResponse);
+
 }
+
+  deslogar() {
+
+    // 1 Alternativa
+    localStorage.removeItem("meuToken");
+    localStorage.removeItem("meuId");
+
+    // 2 Alternativa
+    localStorage.clear();
+
+    window.location.href = "login";
+
+  }
+
+}
+
+
