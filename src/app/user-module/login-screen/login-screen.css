@@ -107,3 +107,38 @@ img { /* Sem nenhum prefixo*/
 
 
 }
+
+/* Media Query */
+
+/* @media screen and (max-width: 768px) {
+    Até 768px, é celular.
+    
+    .robo-image {
+
+        display: none;
+
+    }
+
+    .login-container {
+
+        width: 100vw;
+
+
+    }
+
+} */
+
+ @media screen and (max-width: 1000px) {    
+    /* Até 1000px, é tablet. */
+
+    .robo-image {
+
+        background-position: center;
+
+    }
+
+} 
+
+/* @media screen and (max-width: 768px) {    
+    Até 1366px, é monitor pequeno.
+}  */
