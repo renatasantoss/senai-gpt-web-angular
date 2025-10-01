@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common';
 import { first, firstValueFrom } from 'rxjs';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { IfStmt } from '@angular/compiler';
 
 interface Ichat {
 
@@ -33,6 +34,7 @@ export class TelaChat {
   chatSelecionado: Ichat;
   mensagens: IMessage[];
   mensagemUsuario = new FormControl("");
+  darkMode: boolean = false
 
   constructor (private http: HttpClient, private cd: ChangeDetectorRef) {
 
@@ -45,6 +47,15 @@ export class TelaChat {
   ngOnInit() {
 
     this.getChats();
+
+    let darkModeLocalStorage = localStorage.getItem("darkMode");
+
+    if (darkModeLocalStorage == "true") {
+
+      this.darkMode = true;
+      document.body.classList.toggle("dark-mode", this.darkMode);
+
+    }
 
   }
 
@@ -203,6 +214,16 @@ export class TelaChat {
     localStorage.clear();
 
     window.location.href = "login";
+
+  }
+
+  ligadesligadarkmode() {
+
+    this.darkMode = !this.darkMode
+
+    document.body.classList.toggle("dark-mode", this.darkMode)
+
+    localStorage.setItem("darkMode", this.darkMode.toString());
 
   }
 

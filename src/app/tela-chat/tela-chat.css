@@ -340,3 +340,110 @@ p{
   background: #000;
 
 }
+
+::ng-deep body.dark-mode .left-panel {
+
+    background-color: black !important;
+
+}
+
+::ng-deep body.dark-mode .top {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .bottom {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .chat-item {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .item-chat {
+
+    background-color: black !important;
+    color: white;
+    
+}
+
+::ng-deep body.dark-mode .button {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .central-panel {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .centro {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .item-examples {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .item-capabilities {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .item-liminations {
+
+    background-color: black !important;
+    color: white;
+
+}
+
+::ng-deep body.dark-mode .logo {
+
+    background-image: url(/imgs/Chatdarkmode.png); !important;
+
+}
+
+::ng-deep body.dark-mode .button {
+
+    background-color: #a4a0a0 !important;
+    color: rgb(0, 0, 0);
+
+}
+
+::ng-deep body.dark-mode .item-examples {
+
+    background-color: #a4a0a0 !important;
+
+}
+
+::ng-deep body.dark-mode .item-capabilities {
+
+    background-color: #a4a0a0 !important;
+
+}
+
+::ng-deep body.dark-mode .item-liminations {
+
+    background-color: #a4a0a0 !important;
+
+}
